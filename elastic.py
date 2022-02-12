@@ -12,7 +12,7 @@ es.ping()
 es.index(index="my-index-000001", doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
 
 for i in range(100):
-  es.index(index="python-index-000"+i, doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
+  es.index(index="python-index-000"+str(i), doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
 
 r = requests.get('http://localhost:9200')
 

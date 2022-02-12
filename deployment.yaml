@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-az-resource
+  namespace: logging
+  labels:
+    app: py-az-resource
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: py-az-resource
+  template:
+    metadata:
+      labels:
+        app: py-az-resource
+    spec:
+      containers:
+      - name: py-az-resource
+        image: tomelin/python-load-azure-resources
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 24224
+          protocol: TCP
+        env:
+          - name:  AZURE_CLIENT_ID
+            value: "9a931c99-8095-420c-8600-dfcadca92512"
+          - name:  AZURE_TENANT_ID
+            value: "ae4e6f79-dec3-4e70-98c6-b7a76242029f"
+          - name: AZURE_CLIENT_SECRET
+            value: "SCBr~zytK1Xasg8cvP1uJVk9U91L1bg5eL"
+          - name: AZURE_SUBSCRIPTION_ID
+            value: "8067b51c-a9d2-4e2f-a48b-a64111d82a09"
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: py-az-resource
+  name: py-az-resource
+  namespace: logging
+spec:
+  ports:
+  - port: 24224
+    protocol: TCP
+    targetPort: 24224
+    name: fluent-forward
+  selector:
+    app: py-az-resource
+  type: ClusterIP

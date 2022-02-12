@@ -4,6 +4,6 @@ WORKDIR /app
 COPY requirements.txt .
 COPY discovery_azure.py .
 
-RUN CERTIFICATE_VERIFY=false pip install -r requirements.txt config --global http.sslVerify false
+RUN pip install -r requirements.txt 
 
 CMD [ "python", "discovery_azure.py"]

@@ -25,7 +25,7 @@ print(i)
 
 es.get(index='sw', doc_type='people', id=5)
 
-r = requests.get('http://localhost:9201')
+r = requests.get('http://elasticsearch:9201')
 i = 18
 while r.status_code == 200:
    r = requests.get('https://swapi.dev/api/people/'+ str(i))

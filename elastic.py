@@ -14,7 +14,7 @@ es.index(index="my-index-000001", doc_type="test-type", id=42, body={"any": "dat
 for i in range(100):
   es.index(index="python-index-000"+str(i), doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
 
-r = requests.get('http://localhost:9200')
+r = requests.get('http://elasticsearch:9200')
 
 while r.status_code == 200:
     r = requests.get('https://swapi.dev/api/people/'+ str(i))
@@ -25,7 +25,7 @@ print(i)
 
 es.get(index='sw', doc_type='people', id=5)
 
-r = requests.get('http://localhost:9201')
+r = requests.get('http://elasticsearch:9201')
 i = 18
 while r.status_code == 200:
    r = requests.get('https://swapi.dev/api/people/'+ str(i))

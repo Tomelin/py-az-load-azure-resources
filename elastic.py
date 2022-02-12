@@ -8,10 +8,10 @@ res = requests.get('http://elasticsearch:9200')
 print(res.content)
 i = 1
 es = Elasticsearch("http://elasticsearch:9200")
-
+es.ping()
 es.index(index="my-index-000001", doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
 
-for i in range(100)
+for i in range(100):
   es.index(index="python-index-000"+i, doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
 
 r = requests.get('http://localhost:9200')

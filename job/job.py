@@ -37,4 +37,4 @@ for song in json_object:
     es.index(index='azure', doc_type='resources', body=json.loads(str(song)))
     channel.basic_publish(exchange='', routing_key='resources',body=str(song))
     connection.close()
-    sleep(LOOP_TIME)
+    time.sleep(int(LOOP_TIME))

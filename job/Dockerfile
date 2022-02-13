@@ -7,7 +7,11 @@ RUN adduser --disabled-password --shell /bin/sh --home /azuser azuser
 
 WORKDIR /azuser
 COPY entrypoint.sh .
+COPY entrypoint2.sh .
+COPY job.py .
 RUN chmod 0750 entrypoint.sh 
 RUN chown azuser entrypoint.sh 
-USER azuser
+RUN chown azuser entrypoint2.sh
+RUN chown azuser job.py
+#USER azuser
 ENTRYPOINT ["/azuser/entrypoint.sh"]

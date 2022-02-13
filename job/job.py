@@ -34,7 +34,7 @@ channel = connection.channel()
 channel.queue_declare(queue='resources')
 for song in json_object:
     song['timestamp'] = datetime.now()
-    es.index(index='azure', doc_type='resources', body=json.loads(str(song)))
+    es.index(index='azure', doc_type='resources', body=song)
     channel.basic_publish(exchange='', routing_key='resources',body=str(song))
     connection.close()
     time.sleep(int(LOOP_TIME))
